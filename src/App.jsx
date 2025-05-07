@@ -1,20 +1,21 @@
 import "./App.css";
 import { ListRecettes } from "./pages/listRecettes";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Header } from "./components/Header";
+import { useState } from "react";
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
+
   return (
     <BrowserRouter>
-      <div>
-        <h1>Navbar</h1>
-        <nav>
-          <Link to="/"> Home </Link>
-          {/* <Link to="/ajout"> Ajout utilisateur </Link> */}
-        </nav>
-      </div>
+      <Header onSearch={handleSearch} />
       <Routes>
-        <Route path="/" element={<ListRecettes />} />
-        {/* <Route path="/ajout" element={<AddUser />} /> */}
+        <Route path="/" element={<ListRecettes searchTerm={searchTerm} />} />
       </Routes>
       <footer>Made by Me</footer>
     </BrowserRouter>
