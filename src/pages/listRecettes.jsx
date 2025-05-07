@@ -5,10 +5,11 @@
 // pour afficher uniquement les recettes qui correspondent aux critères sélectionnés.
 
 import { useEffect, useState } from "react";
+import { RecipeCard } from "../components/RecipeCard";
 import recettes from "../../recettes.json";
 import { FilterSelect } from "../components/FilterSelect";
 
-export function ListRecettes() {
+export function ListRecettes({ searchTerm }) {
   const [recettesList, setRecettesList] = useState([]);
   const [selectedIngredient, setSelectedIngredient] = useState("Tous");
   const [selectedAppliance, setSelectedAppliance] = useState("Tous");
@@ -68,6 +69,11 @@ export function ListRecettes() {
   return (
     <>
       <h2>Liste des Recettes</h2>
+      <div className="recipe-list">
+        {filteredRecettes.map((recette) => (
+          <RecipeCard key={recette.id} recette={recette} />
+        ))}
+      </div>
 
       <FilterSelect
         options={allIngredients}
@@ -90,15 +96,9 @@ export function ListRecettes() {
         label="Ustensiles"
       />
 
-      {filteredRecettes.map((recette) => (
-        <div key={recette.id}>
-          <h3>{recette.name}</h3>
-          <p>RECETTE</p>
-          <p>{recette.description}</p>
-          <p>INGREDIENTS</p>
-          <p>{recette.ingredient}</p>
-        </div>
-      ))}
+   {filteredRecettes.map((recette) => (
+          <RecipeCard key={recette.id} recette={recette} />
+        ))}
     </>
   );
 }
