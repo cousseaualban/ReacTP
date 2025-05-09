@@ -8,7 +8,7 @@ export function RecipeCard({ recette }) {
         className="recipe-image"
       />
       <div className="recipe-details">
-        <h2>{recette.name}</h2>
+        <p className="recipe-title">{recette.name}</p>
         <p class="ingredients-title">Recette</p>
         <p class="ingredients-description">{recette.description}</p>
         <p class="ingredients-title">Ingrédients</p>

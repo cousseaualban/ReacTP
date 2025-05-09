@@ -92,7 +92,6 @@ body {
 }
 
 /* FILTRAGE */
-
 .filters {
   width: 100%;
   display: flex;
@@ -208,13 +207,19 @@ body {
   font-size: 0.8rem;
 }
 
+.recipe-title {
+  text-align: start;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
 .recipe-card {
   background-color: white;
   position: relative;
-  width: 80%;
+  width: 50%;
   border-radius: 8px;
   text-align: left;
-  margin: 0 auto;
+  margin: 5px auto;
 }
 
 .recipe-image {
@@ -260,7 +265,7 @@ body {
 }
 
 .ingredient-name {
-  font-weight: bold;
+  font-size: 0.8rem;
 }
 
 .ingredient-quantity {
@@ -310,7 +315,17 @@ body {
   }
 
   .recipe-card {
-    width: 80%;
+    width: 60%;
+  }
+
+  .ingredients-title {
+    font-size: 0.7rem;
+  }
+
+  .ingredient-name,
+  .ingredient-quantity,
+  .ingredients-description {
+    font-size: 0.6rem;
   }
 }
 
@@ -333,6 +348,6 @@ body {
   }
 
   .recipe-card {
-    width: 90%;
+    width: 80%;
   }
 }
