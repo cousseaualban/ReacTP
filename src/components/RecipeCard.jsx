@@ -1,6 +1,7 @@
 export function RecipeCard({ recette }) {
   return (
     <div className="recipe-card">
+      <p className="recipe-time">{recette.time}min</p>
       <img
         src={`/recettes/recettes/${recette.image}`}
         alt={recette.name}

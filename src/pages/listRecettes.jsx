@@ -48,7 +48,15 @@ export function ListRecettes({ searchTerm }) {
   ).sort();
 
   const filteredRecettes = recettesList.filter((recette) => {
-    const matchIngredient =
+    const search = searchTerm.trim().toLowerCase();
+
+    const matchName = recette.name.toLowerCase().includes(search);
+    const matchIngredient = recette.ingredients.some((i) =>
+      i.ingredient.toLowerCase().includes(search)
+    );
+    const matchDescription = recette.description.toLowerCase().includes(search);
+
+    const matchSelectedIngredient =
       selectedIngredient === "Tous" ||
       recette.ingredients.some(
         (i) =>
@@ -56,18 +64,23 @@ export function ListRecettes({ searchTerm }) {
           i.ingredient.trim().toLowerCase() === selectedIngredient
       );
 
-    const matchAppliance =
+    const matchSelectedAppliance =
       selectedAppliance === "Tous" ||
       (recette.appliance &&
         recette.appliance.trim().toLowerCase() === selectedAppliance);
 
-    const matchUstensil =
+    const matchSelectedUstensil =
       selectedUstensil === "Tous" ||
       recette.ustensils.some(
         (u) => u.trim().toLowerCase() === selectedUstensil
       );
 
-    return matchIngredient && matchAppliance && matchUstensil;
+    return (
+      (matchName || matchIngredient || matchDescription) &&
+      matchSelectedIngredient &&
+      matchSelectedAppliance &&
+      matchSelectedUstensil
+    );
   });
 
   return (
