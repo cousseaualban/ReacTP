@@ -16,7 +16,6 @@ function App() {
         <Route path="/" element={<ListRecettes />} />
         {/* <Route path="/ajout" element={<AddUser />} /> */}
       </Routes>
-      <footer>Made by Me</footer>
     </BrowserRouter>
   );
 }
