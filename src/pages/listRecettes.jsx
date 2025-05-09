@@ -11,9 +11,9 @@ import { FilterSelect } from "../components/FilterSelect";
 
 export function ListRecettes({ searchTerm }) {
   const [recettesList, setRecettesList] = useState([]);
-  const [selectedIngredient, setSelectedIngredient] = useState("Tous");
-  const [selectedAppliance, setSelectedAppliance] = useState("Tous");
-  const [selectedUstensil, setSelectedUstensil] = useState("Tous");
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [selectedAppliances, setSelectedAppliances] = useState([]);
+  const [selectedUstensils, setSelectedUstensils] = useState([]);  
 
   useEffect(() => {
     setRecettesList(recettes);
@@ -56,58 +56,60 @@ export function ListRecettes({ searchTerm }) {
     );
     const matchDescription = recette.description.toLowerCase().includes(search);
 
-    const matchSelectedIngredient =
-      selectedIngredient === "Tous" ||
-      recette.ingredients.some(
-        (i) =>
-          i.ingredient &&
-          i.ingredient.trim().toLowerCase() === selectedIngredient
+    const matchSelectedIngredients =
+      selectedIngredients.length === 0 ||
+      selectedIngredients.every((selIng) =>
+        recette.ingredients.some(
+          (i) =>
+            i.ingredient &&
+            i.ingredient.trim().toLowerCase() === selIng.toLowerCase()
+        )
       );
 
-    const matchSelectedAppliance =
-      selectedAppliance === "Tous" ||
-      (recette.appliance &&
-        recette.appliance.trim().toLowerCase() === selectedAppliance);
+    const matchSelectedAppliances =
+      selectedAppliances.length === 0 ||
+      selectedAppliances.includes(recette.appliance.trim().toLowerCase());
 
-    const matchSelectedUstensil =
-      selectedUstensil === "Tous" ||
-      recette.ustensils.some(
-        (u) => u.trim().toLowerCase() === selectedUstensil
+    const matchSelectedUstensils =
+      selectedUstensils.length === 0 ||
+      selectedUstensils.every((ust) =>
+        recette.ustensils.map((u) => u.toLowerCase()).includes(ust)
       );
+
 
     return (
       (matchName || matchIngredient || matchDescription) &&
-      matchSelectedIngredient &&
-      matchSelectedAppliance &&
-      matchSelectedUstensil
+      matchSelectedIngredients &&
+      matchSelectedAppliances &&
+      matchSelectedUstensils
     );
   });
 
-  const clearIngredient = () => setSelectedIngredient("Tous");
-  const clearAppliance = () => setSelectedAppliance("Tous");
-  const clearUstensil = () => setSelectedUstensil("Tous");
+  const clearIngredient = () => setSelectedIngredients("Tous");
+  const clearAppliance = () => setSelectedAppliances("Tous");
+  const clearUstensil = () => setSelectedUstensils("Tous");
 
   return (
     <>
       <div className="filters">
         <FilterSelect
           options={allIngredients}
-          selected={selectedIngredient}
-          onChange={setSelectedIngredient}
+          selected={selectedIngredients}
+          onChange={setSelectedIngredients}
           label="Ingrédients"
           onClear={clearIngredient}
         />
         <FilterSelect
           options={allAppliances}
-          selected={selectedAppliance}
-          onChange={setSelectedAppliance}
+          selected={selectedAppliances}
+          onChange={setSelectedAppliances}
           label="Appareils"
           onClear={clearAppliance}
         />
         <FilterSelect
           options={allUstensils}
-          selected={selectedUstensil}
-          onChange={setSelectedUstensil}
+          selected={selectedUstensils}
+          onChange={setSelectedUstensils}
           label="Ustensiles"
           onClear={clearUstensil}
         />

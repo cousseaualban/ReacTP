@@ -8,7 +8,7 @@
 
 import { useState, useEffect, useRef } from "react";
 
-export function FilterSelect({ options, selected, onChange, label, onClear }) {
+export function FilterSelect({ options, selected, onChange, label }) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const dropdownRef = useRef(null);
@@ -17,25 +17,27 @@ export function FilterSelect({ options, selected, onChange, label, onClear }) {
     option.toLowerCase().includes(searchText.toLowerCase())
   );
 
-  const handleSelect = (value) => {
-    onChange(value);
-    setSearchText("");
+  const handleToggleOption = (value) => {
+    if (selected.includes(value)) {
+      onChange(selected.filter((item) => item !== value));
+    } else {
+      onChange([...selected, value]);
+    }
     setIsOpen(false);
+  };
+
+  const handleClearOption = (value) => {
+    onChange(selected.filter((item) => item !== value));
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -54,7 +56,13 @@ export function FilterSelect({ options, selected, onChange, label, onClear }) {
           />
           <ul>
             {filteredOptions.map((option) => (
-              <li key={option} onClick={() => handleSelect(option)}>
+              <li
+                key={option}
+                onClick={() => handleToggleOption(option)}
+                style={{
+                  fontWeight: selected.includes(option) ? "bold" : "normal",
+                }}
+              >
                 {option.charAt(0).toUpperCase() + option.slice(1)}
               </li>
             ))}
@@ -62,9 +70,13 @@ export function FilterSelect({ options, selected, onChange, label, onClear }) {
         </div>
       )}
 
-      {selected !== "Tous" && (
-        <div className="selected-item" onClick={onClear}>
-          {selected.charAt(0).toUpperCase() + selected.slice(1)} &times;
+      {selected.length > 0 && (
+        <div className="selected-tags">
+          {selected.map((item) => (
+            <div key={item} className="selected-item" onClick={() => handleClearOption(item)}>
+              {item.charAt(0).toUpperCase() + item.slice(1)} &times;
+            </div>
+          ))}
         </div>
       )}
     </div>
