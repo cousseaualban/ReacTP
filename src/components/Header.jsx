@@ -19,7 +19,7 @@ export const Header = ({ onSearch }) => {
       <div className="header-overlay">
         <p className="header-subtitle">
           cherchez parmi plus de 1500 recettes du quotidien, simples et
-          délicieuses
+          délicieuses. Recherchez par nom, ingrédient ou description.
         </p>
         <div className="search-container">
           <input

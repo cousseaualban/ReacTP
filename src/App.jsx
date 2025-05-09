@@ -17,7 +17,6 @@ function App() {
       <Routes>
         <Route path="/" element={<ListRecettes searchTerm={searchTerm} />} />
       </Routes>
-      <footer>Made by Me</footer>
     </BrowserRouter>
   );
 }
