@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 
 export const Header = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -7,6 +8,11 @@ export const Header = ({ onSearch }) => {
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     onSearch(e.target.value);
+  };
+
+  const clearSearch = () => {
+    setSearchTerm("");
+    onSearch("");
   };
 
   return (
@@ -29,6 +35,11 @@ export const Header = ({ onSearch }) => {
             onChange={handleSearch}
             className="header-input"
           />
+          {searchTerm && (
+            <button className="clear-button" onClick={clearSearch}>
+              <FaTimes className="clear-icon" />
+            </button>
+          )}
           <button className="search-button">
             <FaSearch className="search-icon" />
           </button>
