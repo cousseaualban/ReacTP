@@ -83,28 +83,35 @@ export function ListRecettes({ searchTerm }) {
     );
   });
 
+  const clearIngredient = () => setSelectedIngredient("Tous");
+  const clearAppliance = () => setSelectedAppliance("Tous");
+  const clearUstensil = () => setSelectedUstensil("Tous");
+
   return (
     <>
-      <h2>Liste des Recettes</h2>
-      <FilterSelect
-        options={allIngredients}
-        selected={selectedIngredient}
-        onChange={setSelectedIngredient}
-        label="Ingrédients"
-      />
-      <FilterSelect
-        options={allAppliances}
-        selected={selectedAppliance}
-        onChange={setSelectedAppliance}
-        label="Appareils"
-      />
-      <FilterSelect
-        options={allUstensils}
-        selected={selectedUstensil}
-        onChange={setSelectedUstensil}
-        label="Ustensiles"
-      />
-
+      <div className="filters">
+        <FilterSelect
+          options={allIngredients}
+          selected={selectedIngredient}
+          onChange={setSelectedIngredient}
+          label="Ingrédients"
+          onClear={clearIngredient}
+        />
+        <FilterSelect
+          options={allAppliances}
+          selected={selectedAppliance}
+          onChange={setSelectedAppliance}
+          label="Appareils"
+          onClear={clearAppliance}
+        />
+        <FilterSelect
+          options={allUstensils}
+          selected={selectedUstensil}
+          onChange={setSelectedUstensil}
+          label="Ustensiles"
+          onClear={clearUstensil}
+        />
+      </div>
       <div className="recipe-list">
         {filteredRecettes.map((recette) => (
           <RecipeCard key={recette.id} recette={recette} />

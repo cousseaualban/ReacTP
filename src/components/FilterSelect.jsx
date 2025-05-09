@@ -6,22 +6,30 @@
 // - onChange : la fonction à appeler lorsqu’un choix est sélectionné,
 // - label : le texte à afficher comme option par défaut (non sélectionnable).
 
-export function FilterSelect({ options, selected, onChange, label }) {
-    return (
-      <div>
-        <select
-          id={label}
-          value={selected}
-          onChange={(e) => onChange(e.target.value)}
-        >
-          <option value="Tous" disabled hidden>{label}</option>
-          {options.map((option) => (
-            <option key={option} value={option}>
-              {option.charAt(0).toUpperCase() + option.slice(1)}
-            </option>
-          ))}
-        </select>
-      </div>
-    );
-  }
+export function FilterSelect({ options, selected, onChange, label, onClear }) {
+  const handleChange = (e) => {
+    const value = e.target.value;
+    if (value !== "") {
+      onChange(value);
+    }
+  };
+  return (
+    <div>
+      <select id={label} value="" onChange={handleChange}>
+        <option value="" disabled hidden>{label}</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option.charAt(0).toUpperCase() + option.slice(1)}
+          </option>
+        ))}
+      </select>
+
+      {selected !== "Tous" && (
+        <div className="selected-item" onClick={() => onClear()}>
+          {selected.charAt(0).toUpperCase() + selected.slice(1)} &times;
+        </div>
+      )}
+    </div>
+  );
+}
   

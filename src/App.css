@@ -91,6 +91,32 @@ body {
   color: white;
 }
 
+/* FILTRAGE */
+
+.filters{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5vh;
+  margin-top: 5vh;
+}
+
+select{
+  background-color: #fff;
+  color: #000;
+  border-radius: 20px;
+  padding: 17px;
+}
+
+.selected-item{
+  width: auto;
+  margin-top: 2vh;
+  background-color: #ffd15b;
+  color: #000;
+  border-radius: 8px;
+}
+
 /* RECIPE LIST */
 .recipe-list {
   display: grid;
