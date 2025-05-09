@@ -1,7 +1,7 @@
 // ListRecettes est un composant qui gère une liste de recettes avec des filtres dynamiques.
 // Il utilise des menus déroulants (via le composant FilterSelect) pour filtrer les recettes
 // en fonction des ingrédients, des appareils et des ustensiles.
-// Il charge les recettes initialement avec `useEffect` et applique les filtres choisis 
+// Il charge les recettes initialement avec `useEffect` et applique les filtres choisis
 // pour afficher uniquement les recettes qui correspondent aux critères sélectionnés.
 
 import { useEffect, useState } from "react";
@@ -42,53 +42,62 @@ export function ListRecettes({ searchTerm }) {
   const allUstensils = Array.from(
     new Set(
       recettes.flatMap((recette) =>
-        recette.ustensils
-          .filter(Boolean)
-          .map((u) => u.trim().toLowerCase())
+        recette.ustensils.filter(Boolean).map((u) => u.trim().toLowerCase())
       )
     )
   ).sort();
-  
 
   const filteredRecettes = recettesList.filter((recette) => {
-    const matchIngredient =
+    const search = searchTerm.trim().toLowerCase();
+
+    const matchName = recette.name.toLowerCase().includes(search);
+    const matchIngredient = recette.ingredients.some((i) =>
+      i.ingredient.toLowerCase().includes(search)
+    );
+    const matchDescription = recette.description.toLowerCase().includes(search);
+
+    const matchSelectedIngredient =
       selectedIngredient === "Tous" ||
-      recette.ingredients.some( (i) => i.ingredient && i.ingredient.trim().toLowerCase() === selectedIngredient);
+      recette.ingredients.some(
+        (i) =>
+          i.ingredient &&
+          i.ingredient.trim().toLowerCase() === selectedIngredient
+      );
 
-    const matchAppliance =
+    const matchSelectedAppliance =
       selectedAppliance === "Tous" ||
-      (recette.appliance && recette.appliance.trim().toLowerCase() === selectedAppliance);
+      (recette.appliance &&
+        recette.appliance.trim().toLowerCase() === selectedAppliance);
 
-    const matchUstensil =
-      selectedUstensil === "Tous" || 
-      recette.ustensils.some( (u) => u.trim().toLowerCase() === selectedUstensil);
-      
-      return matchIngredient && matchAppliance && matchUstensil;
+    const matchSelectedUstensil =
+      selectedUstensil === "Tous" ||
+      recette.ustensils.some(
+        (u) => u.trim().toLowerCase() === selectedUstensil
+      );
+
+    return (
+      (matchName || matchIngredient || matchDescription) &&
+      matchSelectedIngredient &&
+      matchSelectedAppliance &&
+      matchSelectedUstensil
+    );
   });
 
   return (
     <>
       <h2>Liste des Recettes</h2>
-      <div className="recipe-list">
-        {filteredRecettes.map((recette) => (
-          <RecipeCard key={recette.id} recette={recette} />
-        ))}
-      </div>
-
       <FilterSelect
         options={allIngredients}
         selected={selectedIngredient}
         onChange={setSelectedIngredient}
         label="Ingrédients"
       />
-
       <FilterSelect
         options={allAppliances}
         selected={selectedAppliance}
         onChange={setSelectedAppliance}
         label="Appareils"
       />
-
       <FilterSelect
         options={allUstensils}
         selected={selectedUstensil}
@@ -96,9 +105,11 @@ export function ListRecettes({ searchTerm }) {
         label="Ustensiles"
       />
 
-   {filteredRecettes.map((recette) => (
+      <div className="recipe-list">
+        {filteredRecettes.map((recette) => (
           <RecipeCard key={recette.id} recette={recette} />
         ))}
+      </div>
     </>
   );
 }

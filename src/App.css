@@ -12,6 +12,7 @@ body {
 #root {
   max-width: 1100px;
   text-align: center;
+  color: black;
 }
 
 /* HEADER */
@@ -41,20 +42,10 @@ body {
   color: #ffd15b;
   text-transform: uppercase;
   font-family: anton;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
-}
-
-.header input {
-  width: 100%;
-  padding: 15px;
-  font-size: 16px;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  outline: none;
+  margin: 20px auto;
 }
 
 .search-container {
@@ -81,12 +72,6 @@ body {
   width: 100%;
 }
 
-.header-input::placeholder {
-  color: #aaa;
-  font-style: italic;
-  line-height: 50px;
-}
-
 .search-button {
   background-color: black;
   border: none;
@@ -106,39 +91,30 @@ body {
   color: white;
 }
 
-/* MAIN CONTENT */
-.main-content {
-  padding: 20px;
-}
-
-/* FOOTER */
-.footer {
-  background-color: #343a40;
-  color: #ffffff;
-  text-align: center;
-  padding: 10px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
 /* RECIPE LIST */
 .recipe-list {
   display: grid;
   grid-template-columns: 1fr;
-  justify-content: center;
-  align-content: center;
+  justify-items: center;
   width: 100%;
   gap: 16px;
 }
 
+.recipe-time {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ffd15b;
+  padding: 0 10px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+
 .recipe-card {
   background-color: white;
+  position: relative;
   width: 80%;
-  color: black;
-  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
   margin: 0 auto;
 }
@@ -152,12 +128,6 @@ body {
 
 .recipe-details {
   padding: 16px;
-}
-
-.recipe-details h3 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 10px;
 }
 
 /* INGREDIENTS GRID */
@@ -204,7 +174,6 @@ body {
 @media (min-width: 768px) and (max-width: 1023px) {
   .recipe-list {
     grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
   }
 
   .header {
@@ -227,7 +196,6 @@ body {
 @media (min-width: 1024px) {
   .recipe-list {
     grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
   }
 
   .header {
@@ -240,7 +208,6 @@ body {
 
   .header-subtitle {
     font-size: 1.8rem;
-    margin: 0 auto;
     width: 75%;
   }
 
