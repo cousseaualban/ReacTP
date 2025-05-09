@@ -13,7 +13,7 @@ export function ListRecettes({ searchTerm }) {
   const [recettesList, setRecettesList] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [selectedAppliances, setSelectedAppliances] = useState([]);
-  const [selectedUstensils, setSelectedUstensils] = useState([]);  
+  const [selectedUstensils, setSelectedUstensils] = useState([]);
 
   useEffect(() => {
     setRecettesList(recettes);
@@ -76,7 +76,6 @@ export function ListRecettes({ searchTerm }) {
         recette.ustensils.map((u) => u.toLowerCase()).includes(ust)
       );
 
-
     return (
       (matchName || matchIngredient || matchDescription) &&
       matchSelectedIngredients &&
@@ -113,6 +112,7 @@ export function ListRecettes({ searchTerm }) {
           label="Ustensiles"
           onClear={clearUstensil}
         />
+        <div className="recipe-count">{filteredRecettes.length} recettes</div>
       </div>
       <div className="recipe-list">
         {filteredRecettes.map((recette) => (
