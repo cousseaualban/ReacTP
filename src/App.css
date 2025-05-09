@@ -40,3 +40,279 @@
 .read-the-docs {
   color: #888;
 }
+/* GLOBAL STYLES */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+#root {
+  max-width: 1100px;
+  text-align: center;
+}
+
+/* HEADER */
+.header {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  background-image: url("./bg-img.jpg");
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-title {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  margin: 0;
+}
+
+.header-subtitle {
+  color: #ffd15b;
+  text-transform: uppercase;
+  font-family: anton;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header input {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 50px;
+  width: 80%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin: 0 auto;
+}
+
+.header-input {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  text-align: left;
+  color: gray;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+}
+
+.header-input::placeholder {
+  color: #aaa;
+  font-style: italic;
+  line-height: 50px;
+}
+
+.search-button {
+  background-color: black;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.search-icon {
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  padding: 20px;
+}
+
+/* FILTRAGE */
+
+.filters{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5vh;
+  margin-top: 5vh;
+}
+
+select{
+  background-color: #fff;
+  color: #000;
+  border-radius: 20px;
+  padding: 17px;
+}
+
+.selected-item{
+  width: auto;
+  margin-top: 2vh;
+  background-color: #ffd15b;
+  color: #000;
+  border-radius: 8px;
+}
+
+/* FOOTER */
+.footer {
+  background-color: #343a40;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* RECIPE LIST */
+.recipe-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  gap: 16px;
+}
+
+.recipe-card {
+  background-color: white;
+  width: 80%;
+  color: black;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  margin: 0 auto;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.recipe-details {
+  padding: 16px;
+}
+
+.recipe-details h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* INGREDIENTS GRID */
+.ingredients-title {
+  color: #7a7a7a;
+  text-transform: uppercase;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.ingredients-description {
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  line-height: 0.8rem;
+}
+
+.ingredients-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.ingredient-item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  font-size: 0.9rem;
+  text-align: start;
+}
+
+.ingredient-name {
+  font-weight: bold;
+}
+
+.ingredient-quantity {
+  font-size: 0.8rem;
+  color: gray;
+}
+
+/* MEDIA QUERIES */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .recipe-list {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+
+  .header {
+    height: 70vh;
+  }
+
+  .header-title {
+    font-size: 1.8rem;
+  }
+
+  .header-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .recipe-card {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .recipe-list {
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+  }
+
+  .header {
+    height: 80vh;
+  }
+
+  .header-overlay {
+    width: 80%;
+  }
+
+  .header-subtitle {
+    font-size: 1.8rem;
+    margin: 0 auto;
+    width: 75%;
+  }
+
+  .recipe-card {
+    width: 90%;
+  }
+}
