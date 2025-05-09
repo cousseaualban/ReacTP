@@ -295,6 +295,14 @@ body {
   color: gray;
 }
 
+.recipe-count {
+  align-self: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-left: 20px;
+}
+
 /* MEDIA QUERIES */
 @media (min-width: 768px) and (max-width: 1023px) {
   .recipe-list {
@@ -302,14 +310,11 @@ body {
   }
 
   .header {
-    height: 70vh;
-  }
-
-  .header-title {
-    font-size: 1.8rem;
+    height: 50vh;
   }
 
   .header-subtitle {
+    width: 60%;
     font-size: 1.2rem;
   }
 
@@ -334,7 +339,7 @@ body {
   }
 
   .header {
-    height: 80vh;
+    height: 60vh;
   }
 
   .header-overlay {
@@ -348,5 +353,9 @@ body {
 
   .recipe-card {
     width: 80%;
+  }
+
+  .header-title {
+    width: 150px;
   }
 }
